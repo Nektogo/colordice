@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b10">
+  <meta
+    name="description"
+    content="Dé Couleur : lancez 2, 3 ou 4 dés avec des chances personnalisées pour chaque couleur."
+  >
+
+  <title>Dé Couleur</title>
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header class="header">
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="logo" href="#accueil" aria-label="Retour à l'accueil">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>Dé Couleur</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#accueil">Accueil</a>
+        <a href="#jeu">Jouer</a>
+
+        <div class="nav-dropdown" id="settingsDropdown">
+          <button
+            class="nav-menu-button"
+            id="settingsMenuButton"
+            type="button"
+            aria-expanded="false"
+            aria-controls="settingsPanel"
+          >
+            Réglages
+          </button>
+
+          <section
+            class="settings-panel"
+            id="settingsPanel"
+            aria-label="Réglages du site"
+            hidden
+          >
+            <div class="settings-window-heading">
+              <div>
+                <strong>Réglages</strong>
+                <p>Personnalise ton expérience Dé Couleur.</p>
+              </div>
+
+              <button
+                class="panel-close"
+                id="panelCloseButton"
+                type="button"
+                aria-label="Fermer les réglages"
+              >
+                ×
+              </button>
+            </div>
+
+            <div class="settings-layout">
+              <aside class="settings-sidebar" aria-label="Catégories de réglages">
+                <button
+                  class="settings-tab active"
+                  type="button"
+                  data-tab="profile"
+                  aria-selected="true"
+                >
+                  <span aria-hidden="true">●</span>
+                  Profil
+                </button>
+
+                <button
+                  class="settings-tab"
+                  type="button"
+                  data-tab="general"
+                  aria-selected="false"
+                >
+                  <span aria-hidden="true">⚙</span>
+                  Paramètres
+                </button>
+
+                <button
+                  class="settings-tab"
+                  type="button"
+                  data-tab="visual"
+                  aria-selected="false"
+                >
+                  <span aria-hidden="true">◐</span>
+                  Visuel
+                </button>
+
+                <button
+                  class="settings-tab"
+                  type="button"
+                  data-tab="about"
+                  aria-selected="false"
+                >
+                  <span aria-hidden="true">i</span>
+                  À propos
+                </button>
+              </aside>
+
+              <div class="settings-content">
+                <section class="settings-page active" data-page="profile">
+                  <div class="page-title">
+                    <span class="page-icon" aria-hidden="true">●</span>
+                    <div>
+                      <h2>Profil</h2>
+                      <p>Informations du joueur.</p>
+                    </div>
+                  </div>
+
+                  <div class="fake-profile-card">
+                    <div class="fake-avatar" aria-hidden="true">DC</div>
+
+                    <div>
+                      <strong>Joueur Dé Couleur</strong>
+                      <span>Profil local</span>
+                    </div>
+
+                    <button type="button" disabled>Modifier</button>
+                  </div>
+
+                  <div class="fake-setting-row">
+                    <div>
+                      <strong>Nom d'affichage</strong>
+                      <span>Joueur</span>
+                    </div>
+
+                    <span class="coming-soon">Bientôt</span>
+                  </div>
+                </section>
+
+                <section class="settings-page" data-page="general" hidden>
+                  <div class="page-title">
+                    <span class="page-icon" aria-hidden="true">⚙</span>
+                    <div>
+                      <h2>Paramètres</h2>
+                      <p>Options générales du jeu.</p>
+                    </div>
+                  </div>
+
+                  <div class="fake-setting-row">
+                    <div>
+                      <strong>Son du lancer</strong>
+                      <span>Effet sonore lors d'un lancer</span>
+                    </div>
+
+                    <button class="fake-switch on" type="button" disabled aria-label="Son activé">
+                      <span></span>
+                    </button>
+                  </div>
+
+                  <div class="fake-setting-row">
+                    <div>
+                      <strong>Animation</strong>
+                      <span>Animation des dés de couleur</span>
+                    </div>
+
+                    <button class="fake-switch on" type="button" disabled aria-label="Animation activée">
+                      <span></span>
+                    </button>
+                  </div>
+
+                  <div class="fake-setting-row">
+                    <div>
+                      <strong>Langue</strong>
+                      <span>Français</span>
+                    </div>
+
+                    <span class="coming-soon">Bientôt</span>
+                  </div>
+                </section>
+
+                <section class="settings-page" data-page="visual" hidden>
+                  <div class="page-title">
+                    <span class="page-icon" aria-hidden="true">◐</span>
+                    <div>
+                      <h2>Visuel</h2>
+                      <p>Règle les chances d'apparition de chaque couleur.</p>
+                    </div>
+                  </div>
+
+                  <div class="probability-help">
+                    <span><b>0 %</b> : la couleur ne sort jamais</span>
+                    <span><b>100 %</b> : la couleur sort au moins une fois</span>
+                  </div>
+
+                  <div class="probability-list" id="probabilityList"></div>
+
+                  <div class="panel-footer">
+                    <button class="reset-chances-button" id="resetChancesButton" type="button">
+                      Remettre toutes les couleurs à 50 %
+                    </button>
+
+                    <small>
+                      Tu peux garantir au maximum autant de couleurs qu'il y a de dés.
+                      Les niveaux 50 % et 75 % servent de poids de tirage.
+                    </small>
+                  </div>
+                </section>
+
+                <section class="settings-page" data-page="about" hidden>
+                  <div class="page-title">
+                    <span class="page-icon" aria-hidden="true">i</span>
+                    <div>
+                      <h2>À propos</h2>
+                      <p>Informations sur le projet.</p>
+                    </div>
+                  </div>
+
+                  <div class="about-card">
+                    <div class="logo-mark large" aria-hidden="true"></div>
+                    <div>
+                      <strong>Dé Couleur</strong>
+                      <span>Version 1.1</span>
+                    </div>
+                  </div>
+
+                  <p class="about-text">
+                    Un petit jeu de tirage de couleurs avec 2, 3 ou 4 dés.
+                  </p>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <button class="header-button" id="headerRoll" type="button">
+        Jouer maintenant
+      </button>
+    </nav>
+  </header>
+
+  <main id="accueil">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="tag">Jeu de couleurs</div>
+
+      <h1 id="page-title">Lance tes couleurs</h1>
+
+      <p>
+        Sélectionne 2, 3 ou 4 dés, règle les chances de chaque couleur,
+        puis découvre une nouvelle combinaison à chaque lancer.
+      </p>
+    </section>
+
+    <section class="game" id="jeu" aria-label="Lanceur de dés de couleur">
+      <div class="game-display">
+        <div class="game-info" id="gameInfo">3 dés sélectionnés</div>
+
+        <div class="dice-list" id="diceList" aria-live="polite"></div>
+
+        <div class="game-actions">
+          <button
+            class="small-button"
+            id="resetButton"
+            type="button"
+            title="Réinitialiser"
+            aria-label="Réinitialiser les dés"
+          >
+            ↶
+          </button>
+
+          <button class="roll-button" id="rollButton" type="button">
+            <span aria-hidden="true">🎲</span>
+            <span>Lancer les dés</span>
+          </button>
+
+          <button
+            class="small-button"
+            id="copyButton"
+            type="button"
+            title="Copier le résultat"
+            aria-label="Copier le résultat"
+          >
+            ⧉
+          </button>
+        </div>
+
+        <div class="footer-note">
+          Tu peux aussi appuyer sur la barre d’espace.
+        </div>
+      </div>
+
+      <div class="settings" id="reglages">
+        <div class="setting-block">
+          <div class="setting-title">Nombre de dés</div>
+
+          <div class="dice-count" role="group" aria-label="Nombre de dés">
+            <button class="count-button" type="button" data-count="2">2</button>
+            <button class="count-button active" type="button" data-count="3">3</button>
+            <button class="count-button" type="button" data-count="4">4</button>
+          </div>
+        </div>
+
+        <div class="setting-block">
+          <div class="setting-title">Couleurs et chances actuelles</div>
+
+          <div class="colors" id="colorOverview" aria-label="Couleurs disponibles"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
